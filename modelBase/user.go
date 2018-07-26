@@ -1,4 +1,4 @@
-package model
+package modelBase
 
 import (
 	"github.com/cayleygraph/cayley/quad"
@@ -10,11 +10,12 @@ type User struct {
 	Id int `json:"id"`
 	Name string `json:"name"`
 }
-
+//将一个User根据用户ID和名字转化为一条三元组，label为nil
 func (this User) Quad() quad.Quad {
-	return quad.Make(this.Id, Name.String(), this.Name, "Name_info")
+	return quad.Make(this.Id, UserName.String(), this.Name, nil)
 }
 
+//将一个user添加到cayley中
 func (this User) AddUserToCayley() error {
 	dbUrl := conf.GetDbUrl()
 	store, err := cayley.NewGraph("mongo", dbUrl, nil)
@@ -24,7 +25,8 @@ func (this User) AddUserToCayley() error {
 	return store.AddQuad(this.Quad())
 }
 
-func AddManyUserToCayley(users []User) error {
+//添加一个或者多个user到cayley中
+func AddUserToCayley(users ...User) error {
 	var quadSet []quad.Quad
 	for _, u := range users {
 		quadSet = append(quadSet, u.Quad())

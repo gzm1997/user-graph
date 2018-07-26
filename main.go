@@ -1,46 +1,46 @@
 package main
 
 import (
-	"relation-graph/graphRelation/createTriple/model"
+	"relation-graph/graphRelation/createTriple/modelBase"
 	"time"
 	"relation-graph/graphRelation/createTriple/convert"
 	"fmt"
 	"relation-graph/graphRelation/createTriple/find"
 )
 
-func generateSample() ([]model.ShareFile, []model.CreateGroup, []model.GroupMember) {
-	g1 := model.Group{222, "g1"}
-	g2 := model.Group{223, "g2"}
+func generateSample() ([]modelBase.ShareFile, []modelBase.CreateGroup, []modelBase.GroupMember) {
+	g1 := modelBase.Group{222, "g1"}
+	g2 := modelBase.Group{223, "g2"}
 
 
-	A := model.User{1, "A"}
-	B := model.User{2, "B"}
-	C := model.User{3, "C"}
-	D := model.User{4, "D"}
-	E := model.User{5, "E"}
-	F := model.User{6, "F"}
-	G := model.User{7, "G"}
-	H := model.User{8, "H"}
+	A := modelBase.User{1, "A"}
+	B := modelBase.User{2, "B"}
+	C := modelBase.User{3, "C"}
+	D := modelBase.User{4, "D"}
+	E := modelBase.User{5, "E"}
+	F := modelBase.User{6, "F"}
+	G := modelBase.User{7, "G"}
+	H := modelBase.User{8, "H"}
 
 
-	cgs := []model.CreateGroup{model.CreateGroup{A, g1}, model.CreateGroup{H, g2}}
+	cgs := []modelBase.CreateGroup{modelBase.CreateGroup{A, g1}, modelBase.CreateGroup{H, g2}}
 
 
-	gms := []model.GroupMember{
+	gms := []modelBase.GroupMember{
 		//g1
-		model.GroupMember{g1, A},
-		model.GroupMember{g1, B},
-		model.GroupMember{g1, C},
+		modelBase.GroupMember{g1, A},
+		modelBase.GroupMember{g1, B},
+		modelBase.GroupMember{g1, C},
 		//g2
-		model.GroupMember{g2, A},
-		model.GroupMember{g2, E},
-		model.GroupMember{g2, H},
-		model.GroupMember{g2, G}}
+		modelBase.GroupMember{g2, A},
+		modelBase.GroupMember{g2, E},
+		modelBase.GroupMember{g2, H},
+		modelBase.GroupMember{g2, G}}
 
-	sfs := []model.ShareFile{
+	sfs := []modelBase.ShareFile{
 		//A分享给D
-		model.ShareFile{
-			model.ShareFileDesc{
+		modelBase.ShareFile{
+			modelBase.ShareFileDesc{
 				"write",
 				123,
 				222,
@@ -51,8 +51,8 @@ func generateSample() ([]model.ShareFile, []model.CreateGroup, []model.GroupMemb
 			A,
 			D},
 		// H分享给D
-		model.ShareFile{
-			ShareFileDesc: model.ShareFileDesc{
+		modelBase.ShareFile{
+			ShareFileDesc: modelBase.ShareFileDesc{
 				"read",
 				124,
 				223,
@@ -63,8 +63,8 @@ func generateSample() ([]model.ShareFile, []model.CreateGroup, []model.GroupMemb
 			Subject: H,
 			Object:  D},
 		//	G分享给H
-		model.ShareFile{
-			model.ShareFileDesc{
+		modelBase.ShareFile{
+			modelBase.ShareFileDesc{
 				"write",
 				125,
 				223,
@@ -80,34 +80,34 @@ func generateSample() ([]model.ShareFile, []model.CreateGroup, []model.GroupMemb
 
 func main()  {
 	//sfs, cgs, gms := generateSample()
-	//err := model.InsertManyShareFile(sfs)
+	//err := modelBase.InsertManyShareFile(sfs)
 	//fmt.Println(err)
-	//err = model.InsertManyGroupMember(gms)
+	//err = modelBase.InsertManyGroupMember(gms)
 	//fmt.Println(err)
-	//err = model.InsertManyCreateGroup(cgs)
+	//err = modelBase.InsertManyCreateGroup(cgs)
 	//fmt.Println(err)
-	var allUser []model.User
-	var allGroup []model.Group
+	var allUser []modelBase.User
+	var allGroup []modelBase.Group
 
-	var allCreateGroup []model.CreateGroup
-	var allGroupMember []model.GroupMember
-	var allShareFile []model.ShareFile
+	var allCreateGroup []modelBase.CreateGroup
+	var allGroupMember []modelBase.GroupMember
+	var allShareFile []modelBase.ShareFile
 
 	allUser, allGroup, allCreateGroup, allGroupMember, allShareFile = convert.GetDataFromDb()
 
 
-	fmt.Println(model.AddManyUserToCayley(allUser))
-	fmt.Println(model.AddManyGroupToCayley(allGroup))
-	fmt.Println(model.AddManyCreateGroupToCayley(allCreateGroup))
-	fmt.Println(model.AddManyGroupMemberToCayley(allGroupMember))
-	fmt.Println(model.AddManyShareFileToCayley(allShareFile))
+	fmt.Println(modelBase.AddManyUserToCayley(allUser))
+	fmt.Println(modelBase.AddManyGroupToCayley(allGroup))
+	fmt.Println(modelBase.AddManyCreateGroupToCayley(allCreateGroup))
+	fmt.Println(modelBase.AddManyGroupMemberToCayley(allGroupMember))
+	fmt.Println(modelBase.AddManyShareFileToCayley(allShareFile))
 
 
 	//查询与用户A有邀请关系的所有用户
 	fmt.Println(find.FindInviteRelevant(1))
 
 	//查询与用户A有组员隐形关系的所有用户
-	fmt.Println(find.FindGroupMemberRelvent(1))
+	fmt.Println(find.FindGroupMemberRelvent(4))
 
 	//s := util.New()
 	//s.Add(1)

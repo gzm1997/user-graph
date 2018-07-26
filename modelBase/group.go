@@ -1,4 +1,4 @@
-package model
+package modelBase
 
 import (
 	"github.com/cayleygraph/cayley/quad"
@@ -11,8 +11,9 @@ type Group struct {
 	Name string `json:"name"`
 }
 
+
 func (this Group) Quad() quad.Quad {
-	return quad.Make(this.Id, Name.String(), this.Name, "Name_info")
+	return quad.Make(this.Id, GroupName.String(), this.Name, nil)
 }
 
 func (this Group) AddGroupToCayley() error {
@@ -24,7 +25,7 @@ func (this Group) AddGroupToCayley() error {
 	return store.AddQuad(this.Quad())
 }
 
-func AddManyGroupToCayley(groups []Group) error {
+func AddGroupToCayley(groups ...Group) error {
 	var quadSet []quad.Quad
 	for _, g := range groups {
 		quadSet = append(quadSet, g.Quad())

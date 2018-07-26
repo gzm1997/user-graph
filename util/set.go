@@ -1,7 +1,7 @@
 package util
 
 import (
-	"relation-graph/graphRelation/createTriple/model"
+	"relation-graph/graphRelation/createTriple/modelBase"
 )
 
 var Exists = struct {}{}
@@ -26,25 +26,24 @@ func (s *Set) Add(items ...interface{}) error {
 	return nil
 }
 
-func (this Set) GetResult() ([]model.User, []model.Group) {
+func (this Set) GetResult() ([]modelBase.User, []modelBase.Group, []modelBase.File) {
 	//l := len(this.m)
-	//resultUser := make([]model.User, l)
-	//resultGroup := make([]model.Group, l)
-	resultUser := []model.User{}
-	resultGroup := []model.Group{}
-	i := 0
-	j := 0
+	//resultUser := make([]modelBase.User, l)
+	//resultGroup := make([]modelBase.Group, l)
+	resultUser := []modelBase.User{}
+	resultGroup := []modelBase.Group{}
+	resultFile := []modelBase.File{}
 	for k := range this.m {
 		switch k.(type) {
-		case model.User:
-			resultUser = append(resultUser, k.(model.User))
-			i++
-		case model.Group:
-			resultGroup = append(resultGroup, k.(model.Group))
-			j++
+		case modelBase.User:
+			resultUser = append(resultUser, k.(modelBase.User))
+		case modelBase.Group:
+			resultGroup = append(resultGroup, k.(modelBase.Group))
+		case modelBase.File:
+			resultFile = append(resultFile, k.(modelBase.File))
 		}
 	}
-	return resultUser, resultGroup
+	return resultUser, resultGroup, resultFile
 }
 
 func (this Set) GetInt() []int {

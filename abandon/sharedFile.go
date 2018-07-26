@@ -1,4 +1,4 @@
-package model
+package abandon
 
 import (
 	"relation-graph/graphRelation/createTriple/session"
@@ -23,6 +23,9 @@ type ShareFile struct {
 	Subject User
 	Object User
 }
+
+
+
 
 func InsertAShareFile(sf ShareFile) error {
 	session := session.GetSession()
@@ -51,7 +54,7 @@ func (this ShareFile) Quad() []quad.Quad {
 		this.Subject.Id, Share.String(), this.Object.Id, "Relation"),
 
 		//每两个人之间根据唯一的文件ID确定一条分享关系
-		quad.Make(this.ShareFileDesc.FileId, this.Subject.Id, this.Object.Id, "Share_info"),
+		quad.Make(quad.String(string(this.Subject.Id) + "_" + string(this.Object.Id)), this.Subject.Id, this.Object.Id, "Share_info"),
 
 		//每一条分享关系根据一个文件ID的具体描述
 		quad.Make(this.FileId, Permission.String(), this.Permission, "Desc_info"),
@@ -87,3 +90,15 @@ func AddManyShareFileToCayley(sharefiles []ShareFile) error {
 	}
 	return store.AddQuadSet(quadSet)
 }
+
+
+
+
+// 查询分享文件关系的时候 存储返回值的结构体
+// UserId为有分享文件关系的用户ID
+// PerssionUser为每个具有分享文件关系的用户根据文件ID的分享权限
+type ShareFileResult struct {
+	UserId int
+	PerssionUser []map[int]string
+}
+

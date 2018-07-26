@@ -1,4 +1,4 @@
-package model
+package abandon
 
 import (
 	"relation-graph/graphRelation/createTriple/session"
