@@ -10,7 +10,7 @@ type Set struct {
 	m map[interface{}]struct{}
 }
 
-func New(items ...interface{}) *Set {
+func NewSet(items ...interface{}) *Set {
 	// 获取Set的地址
 	s := &Set{}
 	// 声明map类型的数据结构

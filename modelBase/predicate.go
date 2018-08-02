@@ -2,7 +2,6 @@ package modelBase
 
 import (
 	"fmt"
-	"relation-graph/graphRelation/createTriple/modelRelation"
 )
 
 type Predicate int
@@ -18,8 +17,12 @@ const (
 	FileName
 	CreateGroupLink
 	ClickGroupLink
-	CreateTime
-	ClickTime
+	CreateTimeWrite
+	CreateTimeRead
+	ClickTimeWrite
+	ClickTimeRead
+	CreateGroupShareTime
+	ClickGroupShareTime
 )
 
 
@@ -43,17 +46,25 @@ func (this Predicate) String() string {
 		return "create_group_link"
 	case ClickGroupLink:
 		return "click_group_link"
-	case CreateTime:
-		return "create_time"
-	case ClickTime:
-		return "click_time"
+	case CreateTimeWrite:
+		return "create_time_write"
+	case CreateTimeRead:
+		return "create_time_read"
+	case ClickTimeWrite:
+		return "click_time_write"
+	case ClickTimeRead:
+		return "click_time_read"
+	case CreateGroupShareTime:
+		return "create_group_share_time"
+	case ClickGroupShareTime:
+		return "click_group_share_time"
 	default:
 		return "Unknow"
 	}
 }
 
-func UserId_FileId_Permission(userid int, fileid int, permission modelRelation.FileLinkPermission) string {
-	return fmt.Sprintf("userid_fileid_%s_%s_%s", userid, fileid, permission.String())
+func UserId_FileId(userid int, fileid int) string {
+	return fmt.Sprintf("userid_fileid_%s_%s", userid, fileid)
 }
 
 func UserId_GroupId(userid int, groupid int) string {

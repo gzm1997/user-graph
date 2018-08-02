@@ -3,7 +3,6 @@ package modelBase
 import (
 	"github.com/cayleygraph/cayley/quad"
 	"github.com/cayleygraph/cayley"
-	"relation-graph/graphRelation/createTriple/conf"
 )
 
 type User struct {
@@ -16,25 +15,15 @@ func (this User) Quad() quad.Quad {
 }
 
 //将一个user添加到cayley中
-func (this User) AddUserToCayley() error {
-	dbUrl := conf.GetDbUrl()
-	store, err := cayley.NewGraph("mongo", dbUrl, nil)
-	if err != nil {
-		panic(err)
-	}
+func (this User) AddUserToCayley(store *cayley.Handle, ) error {
 	return store.AddQuad(this.Quad())
 }
 
 //添加一个或者多个user到cayley中
-func AddUserToCayley(users ...User) error {
+func AddUserToCayley(store *cayley.Handle, users ...User) error {
 	var quadSet []quad.Quad
 	for _, u := range users {
 		quadSet = append(quadSet, u.Quad())
-	}
-	dbUrl := conf.GetDbUrl()
-	store, err := cayley.NewGraph("mongo", dbUrl, nil)
-	if err != nil {
-		panic(err)
 	}
 	return store.AddQuadSet(quadSet)
 }

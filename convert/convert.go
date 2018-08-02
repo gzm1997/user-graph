@@ -13,7 +13,7 @@ func GetDataFromModelRelations(allCreateFileLink []modelRelation.CreateFileLink,
 
 
 
-	set := util.New()
+	set := util.NewSet()
 	for _, cfl := range allCreateFileLink {
 		set.Add(cfl.User)
 		set.Add(cfl.File)
