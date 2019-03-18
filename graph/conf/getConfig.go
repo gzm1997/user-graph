@@ -11,7 +11,7 @@ var dbUrl string
 var databaseName string
 
 func init()  {
-	conf, err := config.NewConfig("ini", "./conf/data.yaml")
+	conf, err := config.NewConfig("ini", "./graph/conf/data.yaml")
 	if err != nil {
 		mongodbIp := "120.92.100.60"
 		mongodbPort := 27017

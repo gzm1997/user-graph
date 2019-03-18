@@ -2,7 +2,7 @@ package session
 
 import (
 	"gopkg.in/mgo.v2"
-	"relation-graph/graphRelation/createTriple/conf"
+	"relation-graph/graph/conf"
 	"github.com/cayleygraph/cayley"
 	"github.com/cayleygraph/cayley/graph"
 )

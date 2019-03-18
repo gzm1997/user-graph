@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Graph</title>
+    <script src="../static/js/jquery-1.10.2.min.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <style type="text/css">
+        html, body, #main { height: 100%; width: 100%; margin: 0; padding: 0 }
+    </style>
+</head>
+<body>
+    <p>
+    {{.Start.Name}} <b>最可能认识的人有</b>：
+        {{range .MayKnows}}
+            {{.Name}},
+        {{end}}
+    </p>
+    <div id="main" style=""></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        option = {
+            title: { text: {{.Content}} },
+            tooltip: {
+                formatter: function (x) {
+                    return x.data.des;
+                }
+            },
+            series: [
+                {
+                    type: 'graph',
+                    layout: 'force',
+                    symbolSize: 80,
+                    roam: true,
+                    edgeSymbol: ['circle', 'arrow'],
+                    edgeSymbolSize: [4, 10],
+                    edgeLabel: {
+                        normal: {
+                            textStyle: {
+                                fontSize: 20
+                            }
+                        }
+                    },
+                    force: {
+                        repulsion: 2500,
+                        edgeLength: [10, 50]
+                    },
+                    draggable: true,
+                    itemStyle: {
+                        normal: {
+                            color: '#4b565b'
+                        }
+                    },
+                    lineStyle: {
+                        normal: {
+                            width: 2,
+                            color: '#4b565b'
+
+                        }
+                    },
+                    edgeLabel: {
+                        normal: {
+                            show: true,
+                            formatter: function (x) {
+                                return x.data.name;
+                            }
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            textStyle: {
+                            }
+                        }
+                    },
+                    data: [
+                        {{range .Users}}
+                            {
+                                name: {{.Name}},
+                                symbolSize: 100,
+                                itemStyle: {
+                                    normal: {
+                                        color: 'red'
+                                    }
+                                }
+                            },
+                        {{end}}
+
+                        {{range .Files}}
+                            {
+                                name: {{.Name}},
+                                symbolSize: 100,
+                                itemStyle: {
+                                    normal: {
+                                        color: 'green'
+                                    }
+                                }
+                            },
+                        {{end}}
+
+                        {{range .Groups}}
+                            {
+                                name: {{.Name}},
+                                symbolSize: 100,
+                                itemStyle: {
+                                    normal: {
+                                        color: 'blue'
+                                    }
+                                }
+                            },
+                        {{end}}
+                    ],
+                    links: [
+                        {{range .CreateGroupShareLinks}}
+                            {
+                                source: {{.User.Name}},
+                                target: {{.Group.Name}},
+                                name: "创建群邀请链接",
+                                lineStyle: {
+                                    normal: {
+                                        type: 'dotted',
+                                        color: '#000'
+                                    }
+                                }
+                            },
+                        {{end}}
+
+                        {{range .ClickGroupShareLinks}}
+                            {
+                                source: {{.User.Name}},
+                                target: {{.Group.Name}},
+                                name: "加入群",
+                            },
+                        {{end}}
+
+                        {{range .CreateFileLinks}}
+                            {
+                                source: {{.User.Name}},
+                                target: {{.File.Name}},
+                                name: "创建文件分享链接",
+                            },
+                        {{end}}
+
+                        {{range .ClickFileLinks}}
+                            {
+                                source: {{.User.Name}},
+                                target: {{.File.Name}},
+                                name: "点击文件分享链接",
+                            },
+                        {{end}}
+                    ]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

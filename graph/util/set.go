@@ -1,7 +1,7 @@
 package util
 
 import (
-	"relation-graph/graphRelation/createTriple/modelBase"
+	"relation-graph/graph/modelBase"
 )
 
 var Exists = struct {}{}

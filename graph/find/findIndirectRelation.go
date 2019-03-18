@@ -3,9 +3,9 @@ package find
 import (
 	"github.com/cayleygraph/cayley"
 	"github.com/cayleygraph/cayley/quad"
-	"relation-graph/graphRelation/createTriple/modelBase"
+	"relation-graph/graph/modelBase"
 	"reflect"
-	"relation-graph/graphRelation/createTriple/util"
+	"relation-graph/graph/util"
 )
 
 

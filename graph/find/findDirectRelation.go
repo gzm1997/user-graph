@@ -4,8 +4,8 @@ import (
 	"github.com/cayleygraph/cayley"
 	"github.com/cayleygraph/cayley/quad"
 	"reflect"
-	"relation-graph/graphRelation/createTriple/modelBase"
-	"relation-graph/graphRelation/createTriple/util"
+	"relation-graph/graph/modelBase"
+	"relation-graph/graph/util"
 )
 
 

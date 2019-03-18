@@ -3,7 +3,7 @@ package modelRelation
 import (
 	"github.com/cayleygraph/cayley/quad"
 	"github.com/cayleygraph/cayley"
-	"relation-graph/graphRelation/createTriple/modelBase"
+	"relation-graph/graph/modelBase"
 )
 
 //创建一个群邀请链接

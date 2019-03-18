@@ -1,8 +1,8 @@
 package result
 
 import (
-	"relation-graph/graphRelation/createTriple/session"
-	"relation-graph/graphRelation/createTriple/find"
+	"relation-graph/graph/session"
+	"relation-graph/graph/find"
 )
 
 

@@ -1,9 +1,9 @@
 package convert
 
 import (
-	"relation-graph/graphRelation/createTriple/modelBase"
-	"relation-graph/graphRelation/createTriple/util"
-	"relation-graph/graphRelation/createTriple/modelRelation"
+	"relation-graph/graph/modelBase"
+	"relation-graph/graph/util"
+	"relation-graph/graph/modelRelation"
 )
 
 func GetDataFromModelRelations(allCreateFileLink []modelRelation.CreateFileLink, allClickFileLink []modelRelation.ClickFileLink, allCreateGroupShareLink []modelRelation.CreateGroupShareLink, allClickGroupShareLink []modelRelation.ClickGroupShareLink) ([]modelBase.User, []modelBase.Group, []modelBase.File) {

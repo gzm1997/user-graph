@@ -1,4 +1,4 @@
-mongodbIp = 120.92.100.60
+mongodbIp = 127.0.0.1
 mongodbPort = 27017
 cayleyDatabaseName = testCayley
 databaseName = test

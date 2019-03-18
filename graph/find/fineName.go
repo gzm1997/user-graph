@@ -4,7 +4,7 @@ import (
 	"github.com/cayleygraph/cayley"
 	"github.com/cayleygraph/cayley/quad"
 	"reflect"
-	"relation-graph/graphRelation/createTriple/modelBase"
+	"relation-graph/graph/modelBase"
 )
 
 //根据id查找names
